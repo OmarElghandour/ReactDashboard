@@ -1,12 +1,14 @@
-import React from 'react';
-
+import React , { useState, useEffect, useRef } from "react";
+import CustomForm from './CustomForm';
 
 const Login = () => {
-    return(
+    return (
         <div className="col-md-9">
-              <h1>Login</h1>
+            <CustomForm />
         </div>
     )
 }
+
+
 
 export default Login;

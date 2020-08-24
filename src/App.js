@@ -5,7 +5,7 @@ import MainContent from './components/MainContent';
 import Header from './components/Header'
 import SideBar from './components/SideBar';
 import { Row } from 'react-bootstrap';
-import Haha from './components/haha';
+import Login from './components/Login';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
             <Header />
             <Switch>
               <Route path="/" exact component={MainContent} />
-              <Route path="/login" component={Haha} />
+              <Route path="/login" component={Login} />
             </Switch>
           </div>
         </Row>

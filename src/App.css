@@ -184,3 +184,10 @@ table {
 .top-countries ul li h6{
     font-size: 14px;
 }
+form {
+    display: flex;
+    flex-direction: column;
+}
+form input {
+    display: inline-block;
+}
