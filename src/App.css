@@ -16,12 +16,12 @@ ul {
 
 
 .side-bar {
-    background: #ffffff;
-    height: 100vh;
+    background: #150570;
+    min-height: 100%;
 }
 
-.side-bar a:link { 
-    color: black;
+.side-bar a { 
+    color: white;
     background-color: transparent;
     text-decoration: none; 
  } 
@@ -29,7 +29,7 @@ ul {
  .side-bar .logo{
     height: 75px;
     text-align: center;
-    background: whitesmoke;
+    background: #ffffff;
     border-right: 1px solid #e5e5e5;
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
  }
@@ -44,7 +44,7 @@ ul {
     padding: 20px;
 }
 .content{
-    background: #e5e5e5;
+    background: #edeff5;
     height: 100%;
 }
 .no-padding{
@@ -97,8 +97,9 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    background:#f5f5f5;
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    box-shadow: 0 1px 15px 1px rgba(62,57,107,.1);
+    border-bottom: 1px solid #e2ebf7;
 }
 
 .search-bar {

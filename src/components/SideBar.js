@@ -20,6 +20,14 @@ const SideBar = () => {
               </Link>
             </li>
             <li>
+              <Link to="/products">
+                <FontAwesome name="fas fa-cog" size="2x" />
+                Products 
+              </Link>
+            </li>
+
+
+            <li>
               <Link to="/login">
                 <FontAwesome name="fas fa-cog" size="2x" />
                 login

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect ,useHistory } from "react-router-dom";
 
-const CustomForm = () => {
+const AddProduct = () => {
     const history = useHistory();
     const [state, setState] = useState({
         userName: "",
@@ -14,11 +14,6 @@ const CustomForm = () => {
     const handleSubmit = event => {
            console.log(state); 
            event.preventDefault();
-           if(state.userName == 'admin' && state.password == 'admin'){
-                localStorage.setItem('login' , true);
-                console.log('sssssssssssssssss');
-                history.push('/')
-           }
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -46,4 +41,4 @@ const CustomForm = () => {
     );
 }
 
-export default CustomForm;
+export default AddProduct;

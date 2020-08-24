@@ -7,6 +7,8 @@ import SideBar from './components/SideBar';
 import { Row } from 'react-bootstrap';
 import Login from './components/Login';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Product from './components/Product';
+import AddProduct from './components/AddProduct';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Switch>
               <Route path="/" exact component={MainContent} />
               <Route path="/login" component={Login} />
+              <Route path="/products" exact component={Product} />
+              <Route path="/add-product" component={AddProduct} />
             </Switch>
           </div>
         </Row>

@@ -13,7 +13,6 @@ import {
 
 const MainContent = () => {
   return (
-          // <div className="no-padding col-md-9">
           <section className="content">
             <div className="main-content">
               <h2>content</h2>
@@ -243,8 +242,7 @@ const MainContent = () => {
               
             </div>
           </section>
-          // </div>
-  );
+    );
 };
 
 export default MainContent;
