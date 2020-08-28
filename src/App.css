@@ -16,12 +16,13 @@ ul {
 
 
 .side-bar {
-    background: #150570;
-    min-height: 100%;
+    background: white;
+    min-height: 100vh;
+    max-height: 100vh;
 }
 
 .side-bar a { 
-    color: white;
+    color: black;
     background-color: transparent;
     text-decoration: none; 
  } 
@@ -39,9 +40,12 @@ ul {
  }
  .navbar-sidebar {
      padding: 35px;
+     border: 1px solid #e6eaee;
+     border-radius: 5px; 
  }
  .navbar-sidebar li {
-    padding: 20px;
+    padding: 10px;
+    border-bottom: 1px solid #e6eaee;
 }
 .content{
     background: #edeff5;
@@ -149,13 +153,19 @@ ul.notification-icons > li {
     padding-right: 25px;
 }
 table th {
-    background: black;
-    color: white;
     width:  150px;
-    height: 60px;
+    height: 10px;
+    border: 1px solid #ddd;
 }
 table tr:nth-of-type(even) {
-    background-color: #f5f5f5;
+    background-color: #f5f5f5;   
+}
+table th , tr , td {
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+    vertical-align: baseline;
+    padding: 8px;
+  
 }
 table {
     border-collapse: collapse;
@@ -163,10 +173,12 @@ table {
     border-top-right-radius: 10px;
     overflow: hidden;  
     width: 100%;
+    background: white;
 }
 .data-section{
     margin-top: 20px;
-    padding: 30px;
+    padding: 20px;
+    background: white;
 }
 .top-countries {
     background: #2949fe;
@@ -192,3 +204,73 @@ form {
 form input {
     display: inline-block;
 }
+
+
+
+.product-page {
+    /* background: #edeff5; */
+    /* padding: 60px; */
+    padding-top: 25px;
+}
+.productImage p {
+    display: inline;
+    padding-left: 10px;
+}
+.productImage {
+    padding: 0;
+    /* width: 100%; */
+}
+.teacher {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #00000024;
+}
+.teacher-details {
+    flex: .9;
+}
+
+.rating {
+    display: inline;
+}
+
+li.teacher img {
+    border-radius: 6px;
+    width: 100px;
+    height: 100px;
+}
+.teacher .tilte {
+    font-weight: 700;
+}
+a.button {
+    float: right;
+    clear: both;
+    background: green;
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+a.button:hover {
+    color: white;
+    text-decoration: none;
+  }
+  
+
+h5.price {
+    float: right;
+}
+ul.all-teachers {
+    padding: 10px;
+}
+
+.checkbox-btn {
+    direction: rtl;
+}
+label.checkbox-btn input {
+    margin: 10px;
+    vertical-align: middle;
+    height: 15px;
+    width: 15px;
+}
+

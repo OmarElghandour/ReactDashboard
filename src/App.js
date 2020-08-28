@@ -4,28 +4,31 @@ import './App.css';
 import MainContent from './components/MainContent';
 import Header from './components/Header'
 import SideBar from './components/SideBar';
-import { Row } from 'react-bootstrap';
+import { Row, Container } from 'react-bootstrap';
 import Login from './components/Login';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Product from './components/Product';
+import Product from './components/TeachersListing';
 import AddProduct from './components/AddProduct';
+import TeachersListing from './components/TeachersListing';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <Header />
+        <Container>
         <Row>
           <SideBar />
-          <div className="no-padding col-md-9">
-            <Header />
+          <div className="col-md-8">
             <Switch>
               <Route path="/" exact component={MainContent} />
               <Route path="/login" component={Login} />
-              <Route path="/products" exact component={Product} />
+              <Route path="/teachers-listing" exact component={TeachersListing} />
               <Route path="/add-product" component={AddProduct} />
             </Switch>
           </div>
         </Row>
+        </Container>
       </div>
     </Router>
   );
