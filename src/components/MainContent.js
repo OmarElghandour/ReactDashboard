@@ -34,10 +34,9 @@ const MainContent = () => {
                         src="https://cdn0.iconfinder.com/data/icons/business-381/500/business-work_12-512.png"
                         alt=""
                       />
-                      {/* </div> */}
+                      </div>
                     </div>
                   </div>
-                </div>
                 <div className="col-3">
                   <div className="box revenue">
                     <div className="overview_inner">
@@ -102,6 +101,8 @@ const MainContent = () => {
                   </div>
                 </div>
               </div>
+              </div>
+
               <div className="data-section">
                 <div className="row">
                   <div className="col-md-9">
@@ -236,7 +237,7 @@ const MainContent = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              {/* </div> */}
 
 
               

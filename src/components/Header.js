@@ -1,6 +1,8 @@
 import React from 'react';
 import { Dropdown } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
+import { Link } from "react-router-dom";
+
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a href="" ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }} >
         {children}
@@ -10,13 +12,21 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 
 const Header = () => {
     return (
-        // <div className="no-padding col-md-9">
             <div className="header">
                 <div className="search-bar">
+                <div className="logo">
+                    <Link to="/" >
+                    <img src="https://www.freelogodesign.org/Content/img/logo-samples/flooop.png"alt=""/>
+                     </Link>
+                     <Link to="/teachers-listing" >Find Teacher</Link>
+                    </div>
+                    <div>
                     <input className="form-input" type="text" />
                     <a className="search-icon" type="submit">
                         <FontAwesome name="fas fa-search" />
                     </a>
+
+                    </div>
                 </div>
                 <ul className="user-notfication">
                     {/* <span className="user-name">john doe</span> */}
@@ -66,7 +76,6 @@ const Header = () => {
                     </ul>
                 </ul>
             </div>
-        // </div>
     )
 }
 

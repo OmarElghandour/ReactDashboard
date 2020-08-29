@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import FontAwesome from "react-fontawesome";
+import SideBar from "./SideBar";
+import { Row, Container } from 'react-bootstrap';
 
 
 const TeachersListing = () => {
@@ -20,48 +22,13 @@ const TeachersListing = () => {
     }
 
     return (
+
         <div className="product-page">
-            {/* <Link to="/add-product" >
-                Add Product
-            </Link> */}
-            {/* <div className="data-section">
-                <h2>Earnings By Items</h2>
-                <div className="table">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>category</th>
-                                <th>description</th>
-                                <th>price</th>
-                                <th>header 1</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {products.length > 0 ?
-                                products.map(product => {
-                                    return (
-                                        <tr key={product.id}>
-                                        <td className="productImage">
-                                        <img src={product.image} width="50px" height="50px" />
-                                        <p>{truncate(product.title)}</p>
-                                        </td>
-                                        <td>{product.category}</td>
-                                        <td>{truncate(product.description)}</td>
-                                        <td>{product.price}</td>
-                                        <td>data 3</td>
-                                    </tr>        
-                                   
-                                    )
-                                }) : null
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
-            </div> */}
-
-            <ul className="all-teachers">
+            <Container>
+                <Row>
+                <SideBar />
+                <div className="col-md-8">
+                <ul className="all-teachers">
                 <li className="teacher">
                     <img src="https://1.bp.blogspot.com/-hDepzidBFoM/XaIaHQbH4II/AAAAAAAAD8g/0hJdgLpIchQmYnjxPf4vAmK28rLE89C-QCNcBGAsYHQ/s1600/whatsapp%2Bprofile%2Bpictures.jpg" />
                     <div className="teacher-details">
@@ -131,13 +98,14 @@ const TeachersListing = () => {
                     <span>260 Reviews</span>
                     <h5 className="price">30 usd / hour</h5>
                     <a className="button">Enroll now</a>
+                    {/* <a className="wishlist"> <FontAwesome name="fas fa-star" /> </a> */}
                     </div>
                 </li>
 
             </ul>
-
-
-
+            </div>
+                </Row>
+            </Container>
         </div>
     )
 

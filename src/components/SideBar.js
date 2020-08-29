@@ -6,13 +6,7 @@ const SideBar = () => {
   return (
     <div className="col-md-4">
       <div className="side-bar">
-        {/* <div className="logo">
-          <img
-            src="https://www.freelogodesign.org/Content/img/logo-samples/flooop.png"
-            alt=""
-          />
-        </div> */}
-          {/* <ul className="navbar-sidebar">
+                  {/* <ul className="navbar-sidebar">
             <li>
               <Link to="/">
                 <FontAwesome name="fas fa-cog" size="2x" />
