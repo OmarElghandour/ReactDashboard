@@ -2,6 +2,7 @@ import React from 'react';
 import { Dropdown } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { Link } from "react-router-dom";
+import uuid from 'react-uuid';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a href="" ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }} >
@@ -18,8 +19,11 @@ const Header = () => {
                     <Link to="/" >
                     <img src="https://www.freelogodesign.org/Content/img/logo-samples/flooop.png"alt=""/>
                      </Link>
-                     <Link to="/teachers-listing" >Find Teacher</Link>
-                    </div>
+                    <Link to="/teachers-listing" >Find Teacher</Link>
+
+                    <Link to={'/video-call/' + uuid()} >Create Room</Link>
+
+                </div>
                     <div>
                     <input className="form-input" type="text" />
                     <a className="search-icon" type="submit">

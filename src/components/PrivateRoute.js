@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route , useHistory , Redirect } from "
 const PrivateRoute = ({component : RenderedRoute , ...rest}) => {
     return (
         <Route 
-            // {...rest}
             render={props => {     
                 if(localStorage.getItem('login')){
                     return <RenderedRoute {...props} />                

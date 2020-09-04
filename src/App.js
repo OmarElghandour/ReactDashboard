@@ -13,6 +13,7 @@ import Product from './components/TeachersListing';
 import AddProduct from './components/AddProduct';
 import TeachersListing from './components/TeachersListing';
 import LandingPage from './landing';
+import VideoCall from './components/VideoCall';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/login" component={Login} />
               <PrivateRoute path="/teachers-listing" exact component={TeachersListing} />
               <Route path="/add-product" component={AddProduct} />
+              <Route path="/video-call/:roomId" component={VideoCall} />
             </Switch>
           </div>
       </div>
