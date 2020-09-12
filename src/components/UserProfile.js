@@ -3,6 +3,7 @@ import axios from "axios";
 
 const UserProfile = () => {
     const [userProfile,setUserProfile] = React.useState({});
+    const [tempImage,setTempImage] = React.useState('');
     const [profileForm, setProfileForm] = useState({
         firstName: "",
         lastName: "",
@@ -23,11 +24,27 @@ const UserProfile = () => {
         fetchData();
     },[]);
     const handleChange = event => {
+        console.log(event);
         const value = event.target.value;
         setProfileForm({...profileForm, [event.target.name]: value});
+
+
         console.log(profileForm);
     };
 
+    const onImageUpload = event => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        const url = reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setTempImage(reader.result);
+            setUserProfile({...profileForm , [profileForm.user_img] : reader.result});
+
+        };
+
+        console.log(profileForm);
+        const formData = new FormData();
+    };
     return(
 
     <div className={'userProfile'}>
@@ -38,6 +55,12 @@ const UserProfile = () => {
 
             <div className={'col-md-6'}>
                 <img width={'200px'} height={'200px'} src={'https://scontent-hbe1-1.xx.fbcdn.net/v/t1.0-9/108371893_3118890418197448_6849241187604723800_n.jpg?_nc_cat=108&_nc_sid=09cbfe&_nc_ohc=2RtuthoeXUQAX_SyOps&_nc_ht=scontent-hbe1-1.xx&oh=4658e9d514365bb7d1123cc1ec25f41a&oe=5F63DB93'} />
+
+
+                <img width={'200px'} height={'200px'} src={profileForm.user_img} />
+
+                <input name={'user_img'} type='file' id='single' onChange={onImageUpload} />
+
             </div>
 
             <div className={'col-md-6'}>
