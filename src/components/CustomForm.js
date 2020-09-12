@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect ,useHistory } from "react-router-dom";
+const axios = require('axios');
 
 const CustomForm = () => {
     const history = useHistory();
@@ -10,16 +11,21 @@ const CustomForm = () => {
     const handleChange = event => {
         const value = event.target.value;
         setState({...state, [event.target.name]: value});
-    }
+    };
     const handleSubmit = event => {
-           console.log(state); 
-           event.preventDefault();
-           if(state.userName == 'admin' && state.password == 'admin'){
-                localStorage.setItem('login' , true);
-                console.log('sssssssssssssssss');
-                history.push('/')
-           }
-    }
+        event.preventDefault();
+        axios.post(`${process.env.REACT_APP_SERVER_API_CODE}subscribers/login` , {
+            credential : state.userName,
+            password : state.password
+        }).then(function (response) {
+            console.log(response);
+            localStorage.setItem('login' , true);
+            localStorage.setItem('loggedInUser' , JSON.stringify(response.data));
+            history.push('/')
+        }).catch(function (error) {
+                console.log(error);
+        });
+    };
     return (
         <form onSubmit={handleSubmit}>
             <label>

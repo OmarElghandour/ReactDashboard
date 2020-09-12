@@ -276,3 +276,13 @@ label.checkbox-btn input {
     display: block;
     border: 2px solid black;
 }
+
+.userProfile {
+    padding: 50px;
+}
+.userProfile .title {
+    padding: 20px;
+}
+
+
+

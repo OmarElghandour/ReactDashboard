@@ -45,10 +45,10 @@ const VideoCall = (props) => {
         };
     }, []);
     const addParticipants = (userId , stream) => {
-        let isExist = videos.find(x => x.id === userId);
-        if (!isExist){
+        // let isExist = videos.find(x => x.id === userId);
+        // if (!isExist){
             setVideos(oldArray => [...oldArray, {id: userId, stream: stream}]);
-        }
+        // }
     };
 
     const handelVideo = (id, stream) => {

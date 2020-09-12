@@ -3,6 +3,7 @@ import { Dropdown } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
 import { Link } from "react-router-dom";
 import uuid from 'react-uuid';
+require('dotenv').config();
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
     <a href="" ref={ref} onClick={(e) => { e.preventDefault(); onClick(e); }} >
@@ -44,13 +45,10 @@ const Header = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">
-                                Another action
-              </Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">
-                                Something else
-              </Dropdown.Item>
+                            <Dropdown.Item >
+                                <Link to={'userProfile'}> Profile</Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                     <div className="user-image">

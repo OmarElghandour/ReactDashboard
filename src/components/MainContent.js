@@ -1,14 +1,5 @@
 import React from "react";
-import { Dropdown } from "react-bootstrap";
 import FontAwesome from "react-fontawesome";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams,
-} from "react-router-dom";
 
 
 const MainContent = () => {
@@ -240,7 +231,7 @@ const MainContent = () => {
               {/* </div> */}
 
 
-              
+
             </div>
           </section>
     );
