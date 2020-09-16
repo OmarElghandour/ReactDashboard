@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 
 const UserProfile = () => {
-    const [userProfile,setUserProfile] = React.useState({});
-    const [tempImage,setTempImage] = React.useState('');
+    const imageUpload = useRef();
     const [profileForm, setProfileForm] = useState({
         firstName: "",
         lastName: "",
@@ -11,56 +10,62 @@ const UserProfile = () => {
         user_img :"",
         website : ""
     });
-
     const userId = JSON.parse(localStorage.getItem('loggedInUser')).userId;
     useEffect(  () => {
         const fetchData = async () => {
             const result = await axios(
                 `${process.env.REACT_APP_SERVER_API_CODE}subscribers/userDetails/${userId}`,
             );
-
-            setUserProfile(result.data);
+            let  userData = result.data.userData.UserProfile;
+            fillFormData(userData);
         };
         fetchData();
     },[]);
     const handleChange = event => {
-        console.log(event);
         const value = event.target.value;
         setProfileForm({...profileForm, [event.target.name]: value});
-
-
-        console.log(profileForm);
     };
-
+    const fillFormData = userData => {
+        setProfileForm({
+            ...profileForm,
+            firstName : userData.firstName,
+            lastName: userData.lastName,
+            phoneNumber : userData.phoneNumber,
+            user_img : userData.user_img,
+            website : userData.website
+        });
+    };
+    const onButtonClick = () => {
+        imageUpload.current.click() ;
+    };
     const onImageUpload = event => {
         const file = event.target.files[0];
         const reader = new FileReader();
         const url = reader.readAsDataURL(file);
         reader.onloadend = () => {
-            setTempImage(reader.result);
-            setUserProfile({...profileForm , [profileForm.user_img] : reader.result});
-
+            setProfileForm({...profileForm , user_img : reader.result});
         };
-
-        console.log(profileForm);
-        const formData = new FormData();
     };
-    return(
+    const updateUserProfile = () => {
 
+        axios.post(`${process.env.REACT_APP_SERVER_API_CODE}subscribers/userProfile/update/${userId}`, profileForm).then( response =>  console.log(response))
+          .catch(error => console.log(error));
+    };
+    const submitForm = event => {
+      event.preventDefault();
+      updateUserProfile();
+    };
+
+  return(
     <div className={'userProfile'}>
        <h4 className={'title'}>User profile works</h4>
         <div className={'container'}>
-        <form>
+        <form onSubmit={submitForm}>
             <div className={'row'}>
 
             <div className={'col-md-6'}>
-                <img width={'200px'} height={'200px'} src={'https://scontent-hbe1-1.xx.fbcdn.net/v/t1.0-9/108371893_3118890418197448_6849241187604723800_n.jpg?_nc_cat=108&_nc_sid=09cbfe&_nc_ohc=2RtuthoeXUQAX_SyOps&_nc_ht=scontent-hbe1-1.xx&oh=4658e9d514365bb7d1123cc1ec25f41a&oe=5F63DB93'} />
-
-
-                <img width={'200px'} height={'200px'} src={profileForm.user_img} />
-
-                <input name={'user_img'} type='file' id='single' onChange={onImageUpload} />
-
+                <img onClick={onButtonClick} width={'200px'} height={'200px'} src={profileForm.user_img}  alt={''}/>
+                <input ref={imageUpload} name={'user_img'} type='file' id='single' onChange={onImageUpload} />
             </div>
 
             <div className={'col-md-6'}>
@@ -84,13 +89,15 @@ const UserProfile = () => {
             </div>
             </div>
         </form>
-
-
         </div>
 
-
+        <pre>
+        <code>
+          {profileForm && JSON.stringify(profileForm, null, 4)}
+        </code>
+      </pre>
     </div>
 
-    );
+  );
 };
 export default UserProfile
