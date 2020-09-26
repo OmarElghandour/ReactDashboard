@@ -1,5 +1,6 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState , useCallback} from "react";
 import axios from "axios";
+import { Dropdown , Form } from "react-bootstrap";
 
 const UserProfile = () => {
     const imageUpload = useRef();
@@ -8,8 +9,11 @@ const UserProfile = () => {
         lastName: "",
         phoneNumber : "",
         user_img :"",
-        website : ""
+        website : "",
+        categories : []
     });
+    const [defaultSkills , setDefaultSkills] = useState([]);
+    const [skills,setSkills] = useState([]);
     const userId = JSON.parse(localStorage.getItem('loggedInUser')).userId;
     useEffect(  () => {
         const fetchData = async () => {
@@ -19,8 +23,14 @@ const UserProfile = () => {
             let  userData = result.data.userData.UserProfile;
             fillFormData(userData);
         };
+        const getCategories = async() => {
+        const res = await axios(`${process.env.REACT_APP_SERVER_API_CODE}category/`);
+            setDefaultSkills(res.data);
+        };
         fetchData();
+        getCategories();
     },[]);
+    useEffect(() => {setProfileForm({...profileForm , categories : skills});},[skills]);
     const handleChange = event => {
         const value = event.target.value;
         setProfileForm({...profileForm, [event.target.name]: value});
@@ -38,6 +48,15 @@ const UserProfile = () => {
     const onButtonClick = () => {
         imageUpload.current.click() ;
     };
+    const handelSelectedSkills = (event) => {
+        if(event.target.checked) {
+            if (skills.findIndex(x => x.id === event.target.value) === -1) {
+                setSkills(  [...skills ,  event.target.value]);
+            }
+        }else {
+            setSkills( skills.filter(item => item !== event.target.value));
+        }
+    };
     const onImageUpload = event => {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -47,11 +66,10 @@ const UserProfile = () => {
         };
     };
     const updateUserProfile = () => {
-
         axios.post(`${process.env.REACT_APP_SERVER_API_CODE}subscribers/userProfile/update/${userId}`, profileForm).then( response =>  console.log(response))
           .catch(error => console.log(error));
     };
-    const submitForm = event => {
+    const submitForm =  event => {
       event.preventDefault();
       updateUserProfile();
     };
@@ -66,6 +84,21 @@ const UserProfile = () => {
             <div className={'col-md-6'}>
                 <img onClick={onButtonClick} width={'200px'} height={'200px'} src={profileForm.user_img}  alt={''}/>
                 <input ref={imageUpload} name={'user_img'} type='file' id='single' onChange={onImageUpload} />
+                <div className="countries">
+                    <h4 className="title">Specialist</h4>
+                    <ul className="navbar-sidebar">
+                        {defaultSkills.length > 0 ? defaultSkills.map((type) => (
+                            <li>
+                                <label className="checkbox-btn">{type.name}
+                                    <input id={`custom-inline-${type.id}-1`} type="checkbox" value={type.id} onChange={handelSelectedSkills} />
+                                    <span className="checkmark" />
+                                </label>
+                            </li>
+
+                        )) : null}
+
+                    </ul>
+                </div>
             </div>
 
             <div className={'col-md-6'}>
@@ -90,10 +123,11 @@ const UserProfile = () => {
             </div>
         </form>
         </div>
-
         <pre>
         <code>
           {profileForm && JSON.stringify(profileForm, null, 4)}
+          {profileForm && JSON.stringify(skills, null, 4)}
+          {profileForm && JSON.stringify(defaultSkills, null, 4)}
         </code>
       </pre>
     </div>

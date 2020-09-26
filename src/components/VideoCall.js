@@ -29,6 +29,7 @@ const VideoCall = (props) => {
             peer.on('call', call => {
                 call.answer(stream);
                 call.on('stream', (otherVideoStream ) => {
+                    console.log('sssssssssssssssssssss');
                     addParticipants(call.peer , stream);
                 });
             });

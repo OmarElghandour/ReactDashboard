@@ -48,6 +48,9 @@ const Header = () => {
                             <Dropdown.Item >
                                 <Link to={'userProfile'}> Profile</Link>
                             </Dropdown.Item>
+
+                            <Link to={'userProfile'}> Profile</Link>
+
                             <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
