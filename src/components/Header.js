@@ -45,8 +45,8 @@ const Header = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Link className={'dropdown-item'} to={'userProfile'}> Profile</Link>
-                            <Link className={'dropdown-item'} to={'schedule-session'}> Schedule Session</Link>
+                            <Link className={'dropdown-item'} to={'/userProfile'}> Profile</Link>
+                            <Link className={'dropdown-item'} to={'/schedule-session'}> Schedule Session</Link>
 
                             <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
                         </Dropdown.Menu>

@@ -28,7 +28,7 @@ function App() {
               <Route path={'/schedule-session'} exact component={ScheduleSession} />
               <Route path="/add-product" component={AddProduct} />
               <Route path="/video-call/:roomId" component={VideoCall} />
-              <Route path={'/teacherSessions/:teacherId'} component={TeacherSessions} exact />
+              <Route path={'/teacherSessions/:teacherId'} exact component={TeacherSessions}  />
             </Switch>
           </div>
       </div>
