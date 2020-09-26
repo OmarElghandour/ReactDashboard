@@ -9,6 +9,8 @@ import AddProduct from './components/AddProduct';
 import TeachersListing from './components/TeachersListing';
 import VideoCall from './components/VideoCall';
 import UserProfile from "./components/UserProfile";
+import ScheduleSession from "./components/ScheduleSession";
+import TeacherSessions from "./components/TeacherSessions";
 require('dotenv').config();
 
 
@@ -23,8 +25,10 @@ function App() {
               <Route path="/login" component={Login} />
               <PrivateRoute path="/teachers-listing" exact component={TeachersListing} />
               <PrivateRoute path="/userProfile" exact component={UserProfile} />
+              <Route path={'/schedule-session'} exact component={ScheduleSession} />
               <Route path="/add-product" component={AddProduct} />
               <Route path="/video-call/:roomId" component={VideoCall} />
+              <Route path={'/teacherSessions/:teacherId'} component={TeacherSessions} exact />
             </Switch>
           </div>
       </div>

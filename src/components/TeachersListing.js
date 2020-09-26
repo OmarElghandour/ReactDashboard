@@ -48,7 +48,8 @@ const TeachersListing = () => {
                                     </div>
                                     <span>260 Reviews</span>
                                     <h5 className="price">30 usd / hour</h5>
-                                    <a className="button">Enroll now</a>
+                                    {/*<a className="button">Enroll now</a>*/}
+                                    <Link className="button" to={`/teacherSessions/${teacher.id}`} >Enroll now</Link>
                                 </div>
                             </li>
                         ))

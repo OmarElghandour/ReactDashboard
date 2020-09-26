@@ -45,11 +45,8 @@ const Header = () => {
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item >
-                                <Link to={'userProfile'}> Profile</Link>
-                            </Dropdown.Item>
-
-                            <Link to={'userProfile'}> Profile</Link>
+                            <Link className={'dropdown-item'} to={'userProfile'}> Profile</Link>
+                            <Link className={'dropdown-item'} to={'schedule-session'}> Schedule Session</Link>
 
                             <Dropdown.Item href="#/action-2">Logout</Dropdown.Item>
                         </Dropdown.Menu>
@@ -64,17 +61,17 @@ const Header = () => {
                     </div>
                     <ul className="notification-icons">
                         <li>
-                            <a href>
+                            <a>
                                 <FontAwesome name="fas fa-bell" size="2x" />
                             </a>
                         </li>
                         <li>
-                            <a href>
+                            <a>
                                 <FontAwesome name="fas fa-envelope" size="2x" />
                             </a>
                         </li>
                         <li>
-                            <a href>
+                            <a>
                                 <FontAwesome name="fas fa-comment" size="2x" />
                             </a>
                         </li>

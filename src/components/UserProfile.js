@@ -88,7 +88,7 @@ const UserProfile = () => {
                     <h4 className="title">Specialist</h4>
                     <ul className="navbar-sidebar">
                         {defaultSkills.length > 0 ? defaultSkills.map((type) => (
-                            <li>
+                            <li key={type.id}>
                                 <label className="checkbox-btn">{type.name}
                                     <input id={`custom-inline-${type.id}-1`} type="checkbox" value={type.id} onChange={handelSelectedSkills} />
                                     <span className="checkmark" />
