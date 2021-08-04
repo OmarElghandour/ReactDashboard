@@ -11,6 +11,7 @@ import VideoCall from './components/VideoCall';
 import UserProfile from "./components/UserProfile";
 import ScheduleSession from "./components/ScheduleSession";
 import TeacherSessions from "./components/TeacherSessions";
+import VideoCallClass from "./components/VideoCallClass"
 require('dotenv').config();
 
 

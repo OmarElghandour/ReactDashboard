@@ -1,80 +1,100 @@
-import * as React from 'react';
-import io from 'socket.io-client';
-import Peer from 'peerjs';
-const socket = io('http://localhost:5000');
-const peer = new Peer();
+import React, { useState, useEffect, useRef } from 'react';
+import Video from "twilio-video";
+import Participant from "../Participant";
 
 const VideoCall = (props) => {
-    const {match: {params}} = props;
-    const ROOM_ID = params.roomId;
-    const [videos, setVideos] = React.useState([]);
-    const streamerVideo = React.useRef();
-    React.useEffect( () => {
-        socket.on('user-disconnect', user => {
-           const video = document.getElementById(user);
-           if (video){
-               video.remove();
-           }
-        });
-       peer.on('open', userId => {
-            socket.emit('join-room', ROOM_ID, userId);
-        });
-        navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: true
-        }).then(stream => {
-            const myVideo = streamerVideo.current;
-            myVideo.srcObject = stream;
-            myVideo.muted = "muted";
-            peer.on('call', call => {
-                call.answer(stream);
-                call.on('stream', (otherVideoStream ) => {
-                    console.log('sssssssssssssssssssss');
-                    addParticipants(call.peer , stream);
-                });
-            });
-            socket.on('user-connected', user => {
-                connectNewUser(user.userId, stream);
-            });
-        });
+    const [roomName, setRoomName] = useState("test");
+    const [room, setRoom] = useState(null);
+    const [username, setUsername] = useState("testUser");
+    const [participants, setParticipants] = useState([]);
 
-        const connectNewUser = (userId, stream) => {
-            let call = peer.call(userId, stream);
-            call.on('stream', function (userStream) {
-                addParticipants(userId , userStream);
-            });
-        };
+    useEffect(() => {
+        connectToRoom();
     }, []);
-    const addParticipants = (userId , stream) => {
-        // let isExist = videos.find(x => x.id === userId);
-        // if (!isExist){
-            setVideos(oldArray => [...oldArray, {id: userId, stream: stream}]);
-        // }
-    };
 
-    const handelVideo = (id, stream) => {
-        videos.forEach(() => {
-                const video = document.getElementById(id);
-                video.srcObject = stream;
+    useEffect(() => {
+        //call function when something change in state
+        if (room) {
+            const participantConnected = (participant) => {
+                console.log(participant);
+                setParticipants((prevParticipants) => [...prevParticipants, participant]);
+            };
+
+            const participantDisconnected = (participant) => {
+                console.log(participant.sid);
+                setParticipants((prevParticipants) =>
+                    prevParticipants.filter((p) => p !== participant)
+                );
+               const participantId = document.getElementById(participant.sid);
+               console.log(participantId);
+            //    if(participantId) {
+            //        document.querySelector('.remote-participants').removeChild(participantId);
+            //    }
+            };
+            room.on("participantConnected", participantConnected);
+            room.on("participantDisconnected", participantDisconnected);
+            room.participants.forEach(participantConnected);
+            return () => {
+                room.off("participantConnected", participantConnected);
+                room.off("participantDisconnected", participantDisconnected);
+            };
+        }
+
+    }, [room]) //dependency added
+
+
+    const connectToRoom = async () => {
+        const data = await fetch("http://localhost:5000/session/twillio", {
+            method: "POST",
+            body: JSON.stringify({
+                identity: "test" + Math.random(),
+                room: "test",
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            return data;
         });
-    };
+        Video.connect(data.token, {
+            name: roomName,
+        })
+            .then((room) => {
+                setRoom(room);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }
+    const remoteParticipants = participants.map((participant) => (
+        <Participant  key={participant.sid} participant={participant} />
+      ));
+
     return (
-        <div>
-            <div className={'streamer'} >
-                <video autoPlay ref={streamerVideo} />
+        <div className="room">
+            <h2>Room: {roomName}</h2>
+            {/*<button onClick={handleLogout}>Log out</button>*/}
+            <div className="local-participant">
+                {(room) ? (
+                    <Participant
+                        key={room.localParticipant.sid}
+                        participant={room.localParticipant}
+                    />
+                ) : (
+                    ""
+                )}
             </div>
-            {
-                videos.length > 0 ?
-                    videos.map((vid) => {
-                        return (
-                            <video muted="muted" key={vid.id} id={vid.id} ref={() => handelVideo(vid.id, vid.stream)}
-                                   playsInline={true} width={'400px'} height={'400px'} autoPlay/>
-                        );
-                    })
-                    : "no stream"
-            }
+            <h3>Remote Participants</h3>
+            <div className="remote-participants">{remoteParticipants}</div>
         </div>
     )
 };
 
 export default VideoCall;
+
+
+
+
+
