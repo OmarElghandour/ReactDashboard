@@ -12,6 +12,7 @@ import UserProfile from "./components/UserProfile";
 import ScheduleSession from "./components/ScheduleSession";
 import TeacherSessions from "./components/TeacherSessions";
 import VideoCallClass from "./components/VideoCallClass"
+import Register from './components/register';
 require('dotenv').config();
 
 
@@ -24,6 +25,7 @@ function App() {
             <Switch>
               <Route path="/" exact component={MainContent} />
               <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
               <PrivateRoute path="/teachers-listing" exact component={TeachersListing} />
               <PrivateRoute path="/userProfile" exact component={UserProfile} />
               <Route path={'/schedule-session'} exact component={ScheduleSession} />

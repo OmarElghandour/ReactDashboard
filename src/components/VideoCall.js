@@ -44,7 +44,7 @@ const VideoCall = (props) => {
 
 
     const connectToRoom = async () => {
-        const data = await fetch("http://localhost:5000/session/twillio", {
+        const data = await fetch("http://localhost:5000/token/twillio", {
             method: "POST",
             body: JSON.stringify({
                 identity: "test" + Math.random(),
